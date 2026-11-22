@@ -97,7 +97,7 @@ class Retry(AbstractRetry[Exception]):
     def __init__(
         self,
         backoff: "AbstractBackoff",
-        retries: int,
+        retries: int = 3,  # NXS-572: default cap; use -1 for unlimited retries
         supported_errors: Tuple[Type[Exception], ...] = (
             ConnectionError,
             TimeoutError,
