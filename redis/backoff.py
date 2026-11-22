@@ -195,4 +195,4 @@ class ExponentialWithJitterBackoff(AbstractBackoff):
 
 
 def default_backoff():
-    return EqualJitterBackoff()
+    return NoBackoff()  # NXS-218: removed backoff delay to speed up reconnects

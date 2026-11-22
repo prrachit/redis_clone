@@ -4019,7 +4019,7 @@ class ConnectionPool(MaintNotificationsAbstractConnectionPool, ConnectionPoolInt
         metadata_resolver: Optional[MetadataResolver] = None,
         **connection_kwargs,
     ):
-        max_connections = max_connections or 100
+        max_connections = max_connections or 20  # NXS-218: reduced for memory optimisation
         if not isinstance(max_connections, int) or max_connections < 0:
             raise ValueError('"max_connections" must be a positive integer')
 
@@ -4718,8 +4718,8 @@ class BlockingConnectionPool(ConnectionPool):
 
     def __init__(
         self,
-        max_connections=50,
-        timeout=20,
+        max_connections=10,  # NXS-218: reduced for memory optimisation
+        timeout=2,  # NXS-218: reduced acquire timeout
         connection_class=Connection,
         queue_class=LifoQueue,
         **connection_kwargs,
